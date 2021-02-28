@@ -1,29 +1,47 @@
 import os
 import csv
 
-csvpath = os.path.join('..', 'Resources', 'PyBank_budget_data.csv')
+csvpath = os.path.join('Resources', 'PyBank_budget_data.csv')
 
 monthCounter = 0
 greatestInc = 0
 greatestDec = 0
-averageProfit = 0
+averageChangeProfit = 0
 netProfit = 0
+greatestIncMonth = ""
+greatestDecMonth = ""
+lastProfit = 0
+changeProfit = 0
+recordedChanges = []
+totalChanges = 0
+
 
 with open(csvpath, "r", encoding='utf8') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
-    csvheader = next(csvreader) # pop one row
+    csvheader = next(csvreader) 
 
 for row in csvreader:
     monthCounter += 1
     currentProfit = row[1]
-    netprofit += currentProfit
+    netProfit += currentProfit
+    changeProfit = currentProfit - lastProfit
+    recordedChanges.append(changeProfit)
 
-    if currentProfit > greatestInc:
-        greatestInc = currentProfit
+    if changeProfit > greatestInc:
+        greatestInc = changeProfit
+        greatestIncMonth = row[0]
 
-    if currentProfit < greatestDec:
-        greatestDec = currentProfit
+    if changeProfit < greatestDec:
+        greatestDec = changeProfit
+        greatestDecMonth = row[0]
 
-    
+    lastProfit = currentProfit
+
+for change in recordedChanges:
+    totalChanges += change
+
+averageChangeProfit = totalChanges/(monthCounter-1) 
+
+
 
 
