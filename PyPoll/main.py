@@ -1,9 +1,3 @@
-#Your task is to create a Python script that analyzes the votes and calculates each of the following:
-#The total number of votes cast
-#A complete list of candidates who received votes
-#The percentage of votes each candidate won
-#The total number of votes each candidate won
-#The winner of the election based on popular vote.
 import os
 import csv
 
@@ -21,19 +15,18 @@ with open(csvpath, "r", encoding='utf8', newline ='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader) 
 
-for row in csvreader:
-    totalVotes += 1
-    votes.append(row(2))
+    for row in csvreader:
+        totalVotes += 1
+        votes.append(row(2))
 
-    if row(2) in candidates:
+        if row(2) not in candidates:
+            candidates.append(row(2))
 
-    else:
-        candidates.append(row(2))
 print("Election Results")
+print("-------------------------")
+print (f"Total Votes: {totalVotes}")
+print("-------------------------")
 
-print("-------------------------")
-print (totalVotes)
-print("-------------------------")
 for candidate in candidates:
     candidateVotes = votes.count(candidate)
     percentVotes = candidateVotes/totalVotes

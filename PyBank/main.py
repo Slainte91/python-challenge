@@ -14,33 +14,36 @@ lastProfit = 0
 changeProfit = 0
 recordedChanges = []
 totalChanges = 0
+currentProfit = 0
 
 
 with open(csvpath, "r", encoding='utf8', newline ='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader) 
 
-for row in csvreader:
-    monthCounter += 1
-    currentProfit = row[1]
-    netProfit += currentProfit
-    changeProfit = currentProfit - lastProfit
-    recordedChanges.append(changeProfit)
+    for row in csvreader:
+        monthCounter += 1
+        currentProfit = int(row[1])
+        netProfit += currentProfit
+        changeProfit = currentProfit - lastProfit
+        recordedChanges.append(changeProfit)
 
-    if changeProfit > greatestInc:
-        greatestInc = changeProfit
-        greatestIncMonth = row[0]
+        if changeProfit > greatestInc:
+            greatestInc = changeProfit
+            greatestIncMonth = row[0]
 
-    if changeProfit < greatestDec:
-        greatestDec = changeProfit
-        greatestDecMonth = row[0]
+        if changeProfit < greatestDec:
+            greatestDec = changeProfit
+            greatestDecMonth = row[0]
 
-    lastProfit = currentProfit
+        lastProfit = currentProfit
+
+recordedChanges.pop(0)
 
 for change in recordedChanges:
     totalChanges += change
 
-averageChangeProfit = totalChanges/(monthCounter-1) 
+averageChangeProfit = round(totalChanges/(monthCounter-1),2) 
 
 print("Financial Analysis")
 print("-------------------------")
