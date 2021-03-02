@@ -17,10 +17,10 @@ with open(csvpath, "r", encoding='utf8', newline ='') as csvfile:
 
     for row in csvreader:
         totalVotes += 1
-        votes.append(row(2))
+        votes.append(row[2])
 
-        if row(2) not in candidates:
-            candidates.append(row(2))
+        if row[2] not in candidates:
+            candidates.append(row[2])
 
 print("Election Results")
 print("-------------------------")
@@ -29,13 +29,13 @@ print("-------------------------")
 
 for candidate in candidates:
     candidateVotes = votes.count(candidate)
-    percentVotes = candidateVotes/totalVotes
+    percentVotes = round((candidateVotes/totalVotes)*100,3)
 
     if candidateVotes > greatestVotes:
         greatestVotes = candidateVotes
         greatestVotesName = candidate
 
-    print(f"{candidate}: {percentVotes} ({candidateVotes})")
+    print(f"{candidate}: {percentVotes}% ({candidateVotes})")
 
 print("-------------------------")
 print(f"Winner: {greatestVotesName}")
