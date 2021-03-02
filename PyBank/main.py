@@ -43,7 +43,7 @@ for change in recordedChanges:
 averageChangeProfit = totalChanges/(monthCounter-1) 
 
 print("Financial Analysis")
-print("----------------------------")
+print("-------------------------")
 print(f"Total Months: {monthCounter}")
 print(f"Total: ${netProfit}")
 print(f"Average Change: ${averageChangeProfit}")
