@@ -7,12 +7,17 @@
 import os
 import csv
 
-csvpath = os.path.join("..","Resources", "election_data.csv")
+csvpath = os.path.join("Resources", "election_data.csv")
 
 totalVotes = 0
+candidates = []
 
 with open(csvpath, "r", encoding='utf8', newline ='') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader) 
 
-for row in 
+for row in csvreader:
+    totalVotes += 1
+
+print (totalVotes)
+
