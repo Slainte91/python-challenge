@@ -22,21 +22,32 @@ with open(csvpath, "r", encoding='utf8', newline ='') as csvfile:
         if row[2] not in candidates:
             candidates.append(row[2])
 
-print("Election Results")
-print("-------------------------")
-print (f"Total Votes: {totalVotes}")
-print("-------------------------")
+output = os.path.join("analysis", "analysis.txt")
+with open(output, "w", newline = "", encoding = "utf8") as txtfile:
+    # used https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file/36571602
+    print("Election Results")
+    print("Election Results", file=txtfile)
+    print("-------------------------")
+    print("-------------------------", file=txtfile)
+    print(f"Total Votes: {totalVotes}")
+    print(f"Total Votes: {totalVotes}", file=txtfile)
+    print("-------------------------")
+    print("-------------------------", file=txtfile)
 
-for candidate in candidates:
-    candidateVotes = votes.count(candidate)
-    percentVotes = round((candidateVotes/totalVotes)*100,3)
+    for candidate in candidates:
+        candidateVotes = votes.count(candidate)
+        percentVotes = round((candidateVotes/totalVotes)*100,3)
 
-    if candidateVotes > greatestVotes:
-        greatestVotes = candidateVotes
-        greatestVotesName = candidate
+        if candidateVotes > greatestVotes:
+            greatestVotes = candidateVotes
+            greatestVotesName = candidate
 
-    print(f"{candidate}: {percentVotes}% ({candidateVotes})")
+        print(f"{candidate}: {percentVotes}% ({candidateVotes})")
+        print(f"{candidate}: {percentVotes}% ({candidateVotes})", file=txtfile)
 
-print("-------------------------")
-print(f"Winner: {greatestVotesName}")
-print("-------------------------")
+    print("-------------------------")
+    print("-------------------------", file=txtfile)
+    print(f"Winner: {greatestVotesName}")
+    print(f"Winner: {greatestVotesName}", file=txtfile)
+    print("-------------------------")
+    print("-------------------------", file=txtfile)

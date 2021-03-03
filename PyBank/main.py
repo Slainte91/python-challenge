@@ -52,3 +52,14 @@ print(f"Total: ${netProfit}")
 print(f"Average Change: ${averageChangeProfit}")
 print(f"Greatest Increase in Profits: {greatestIncMonth} (${greatestInc})")
 print(f"Greatest Decrease in Profits: {greatestDecMonth} (${greatestDec})")
+
+output = os.path.join("analysis", "analysis.txt")
+with open(output, "w", newline = "", encoding = "utf8") as txtfile:
+    # used https://stackoverflow.com/questions/36571560/directing-print-output-to-a-txt-file/36571602
+    print("Financial Analysis", file = txtfile)
+    print("-------------------------", file = txtfile)
+    print(f"Total Months: {monthCounter}", file = txtfile)
+    print(f"Total: ${netProfit}", file = txtfile)
+    print(f"Average Change: ${averageChangeProfit}", file = txtfile)
+    print(f"Greatest Increase in Profits: {greatestIncMonth} (${greatestInc})", file = txtfile)
+    print(f"Greatest Decrease in Profits: {greatestDecMonth} (${greatestDec})", file = txtfile)
